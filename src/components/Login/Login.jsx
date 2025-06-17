@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth";
 import { auth } from "../../firebase/firebase.init";
 
 const Login = () => {
   const [user, setUser] = useState(null);
   const provider = new GoogleAuthProvider();
+  const provider2 = new GithubAuthProvider();
 
   const handleGoogleSingIn = () => {
     console.log("google sing in");
@@ -13,6 +14,18 @@ const Login = () => {
       .then((result) => {
         console.log(result.user);
         setUser(result.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const handleGithubSingIn = () => {
+    console.log("google sing in");
+
+    signInWithPopup(auth, provider2)
+      .then((result) => {
+        setUser(result.user)
+        
       })
       .catch((error) => {
         console.log(error);
@@ -30,6 +43,9 @@ const Login = () => {
         console.log(error);
       });
   };
+
+
+
   return (
     <div>
       <h2>Please Login</h2>
@@ -37,7 +53,11 @@ const Login = () => {
       {user ? (
         <button onClick={handleSingOut}>SingOut</button>
       ) : (
-        <button onClick={handleGoogleSingIn}>Sing In With Google</button>
+      <>
+      <button onClick={handleGoogleSingIn}>Sing In With Google</button>
+      <button onClick={handleGithubSingIn}>Sing In With Github</button>
+      
+      </>
       )}
       {user && (
         <div>
