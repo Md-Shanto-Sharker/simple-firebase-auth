@@ -12,6 +12,7 @@ import Root from './layouts/Root.jsx';
 import Home from './components/Home/Home.jsx';
 import Login from './components/Login/Login.jsx';
 
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -24,6 +25,7 @@ const router = createBrowserRouter([
       path:'login',
       Component:Login
     }
+    
    ]
   },
 ]);
